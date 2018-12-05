@@ -37,3 +37,13 @@
   - spades
   - megahit
 
+## Strain comparisons
+  - bwa
+  - samtools
+  - bamtools
+  - bedtools
+  - MUSCLE
+  - FastTree
+  - r-ggplot2
+  - bioconductor-ggtree
+  - r-phangorn
