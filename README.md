@@ -15,11 +15,6 @@
   - seqkit=0.9.1
   - bwa=0.7.17
   - samtools
-  - pip
-  - pip:
-    - snakemake==5.3.0
-    - cookiecutter==1.6.0
-    - datrie==0.7.1
 
 ## Classification
 
