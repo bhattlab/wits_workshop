@@ -22,7 +22,7 @@ from: neurodebian:jessie
       git git-annex-standalone
     apt-get clean
 
-
+    apt-get install -y g++
 
 
     # install anaconda
@@ -37,18 +37,23 @@ from: neurodebian:jessie
 
     # requirements for taxonomic classification
     conda install -y -c conda-forge -c bioconda -c r \
-		kraken2 bracken krona kraken ncurses datrie r-ggplot2 r-doby r-rcolorbrewer r-scales r-plyr r-stringi
-    
-    
+		kraken2 krona kraken ncurses datrie r-ggplot2 r-doby r-rcolorbrewer r-scales r-plyr r-stringi
+
     mkdir /usr/local/anaconda/bin/taxonomy
     ktUpdateTaxonomy.sh
+
+		#install bracken from source
+		git clone https://github.com/jenniferlu717/Bracken.git
+    cd Bracken
+    sh install_bracken.sh
 
     # make /data and /scripts so we can mount it to access external resources
     if [ ! -d /data ]; then mkdir /data; fi
     if [ ! -d /scripts ]; then mkdir /scripts; fi
-    
 
 
 
-%runscript 
+
+%runscript
     exec /bin/bash
+		export PATH="$PATH:/root/Bracken/"
