@@ -34,8 +34,7 @@ process kraken {
 	time '1h'
 	memory '10GB'
 
-	//the script to be run is surrounded by triple-double quotes, and has no required keyword.
-	//there are several optional keywords that can be used here (see docs)
+	script:
 	"""
 	#!/usr/bin/env bash
 
@@ -65,7 +64,7 @@ process bracken {
 	time '1h'
 	memory { 8.GB * task.attempt }
 
-	//script to be run, with interpreter specified
+	script:
 	"""
 	#!/usr/bin/env bash
 
@@ -88,7 +87,7 @@ process collect_results {
 	time '1h'
 	memory {2.GB * task.attempt } //dynamic resource allocation!
 
-	//because the default interpreter is bash, the shebang line is omitted below
+	script:
 	"""
 	collate_results.py $params.tax_level $data class_long.tsv $f
 	"""
@@ -99,6 +98,7 @@ process barplot {
 	input: file f from collect_results_ch
 	output: file 'barplot.pdf' into barplot_ch
 
+	script:
 	"""
 	composition_barplot.R $f barplot.pdf
 	"""
@@ -112,6 +112,7 @@ process krona {
 	cpus 1
 	time '1h'
 	memory '1GB'
+
 
 	"""
 	ktImportTaxonomy -m 3 -s 0 -q 0 -t 5 -i ${k} -o krona_${k}.html \
