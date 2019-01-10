@@ -16,25 +16,28 @@ nextflow ../wits_workshop/nextflow/taxonomic_classification/taxonomic_classifica
 
 //The parameters below can all be overridden with --parametername on the commandline (e.g. --in or --dataset_table)
 params.in = "test_data/*.f*q"
-params.db = "/labs/asbhatt/data/program_indices/kraken2/kraken_unmod/standard"
+params.db = "/labs/asbhatt/data/program_indices/kraken2/kraken_unmod/standard/"
 params.readlen = 150
 params.tax_level = 'S'
 params.dataset_table = 'test_data/datasets.tsv'
 
 data = file(params.in)
+krakdb = file(params.db)
 dataset_table = file(params.dataset_table)
 
 process kraken {
 	//publishDir 'outs/' //, mode: symlink, overwrite: true
 		//don't publish to the outs folder, as this is an intermediate
 		//publishing the results can be done by symlinking or copying the outputs
-	input: file d from data //input channel is a file, as declared above
+	input:
+		file d from data //input channel is a file, as declared above
+		file krakdb
 	output: file "${d.baseName}_kraken.tsv" into kraken_ch //output channel consists of *kraken.tsv files
 
 	//resource requirements are specified in this way:
 	cpus 1
-	time '1h'
-	memory '10GB'
+	time '4h'
+	memory '2GB' //20
 
 	script:
 	"""
@@ -47,7 +50,7 @@ process kraken {
 	#when part of a larger name, as in the tsv output filename below, the variable must be enclosed with {}
 	# the final $d names the input.
 
-	time kraken2 --db $params.db --threads $task.cpus \
+	kraken2 --db $krakdb/ --threads $task.cpus \
 	--report ${d.baseName}_kraken.tsv \
 	--quick --memory-mapping \
 	$d
