@@ -46,8 +46,8 @@ from: neurodebian:jessie
 		git clone https://github.com/jenniferlu717/Bracken.git
     cd Bracken
     sh install_bracken.sh
-		ln -s /root/Bracken/bracken /bin/bracken
-		ln -s /root/Bracken/bracken-build /bin/bracken-build
+		ln -s /root/Bracken/bracken /usr/bin/bracken
+		ln -s /root/Bracken/bracken-build /usr/bin/bracken-build
 
     # make /data and /scripts so we can mount it to access external resources
     if [ ! -d /data ]; then mkdir /data; fi
