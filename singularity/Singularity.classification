@@ -46,7 +46,7 @@ from: neurodebian:jessie
     git clone https://github.com/jenniferlu717/Bracken.git
     cd Bracken
     bash install_bracken.sh
-    cp bracken* /usr/local/bin/
+    cp -r * /usr/local/bin/
 
 
     # make /data and /scripts so we can mount it to access external resources
