@@ -121,6 +121,6 @@ process krona {
 
 	"""
 	ktImportTaxonomy -m 3 -s 0 -q 0 -t 5 -i ${k} -o krona_${k}.html \
-	 -tax \$(which kraken2 | sed 's/envs\\/classification2.*\$//g')/envs/classification2/bin/taxonomy
+	 -tax \$(which ktImportTaxonomy | sed 's/\\/ktImportTaxonomy//g')/taxonomy
 	"""
 }
