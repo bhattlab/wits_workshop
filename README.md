@@ -15,11 +15,14 @@
   - seqkit
   - bwa
   - samtools
+	- prinseq
+	- super-deduper
+	- seqtk
 
 ## Classification
 
   - kraken2
-	- krona
+	- krona (with databases)
 	- bracken
   - datrie
   - r-ggplot2
@@ -45,3 +48,24 @@
   - r-ggplot2
   - bioconductor-ggtree
   - r-phangorn
+
+## Long read assembly
+
+	- python>3.5
+  - pilon
+  - bwa
+  - minimap2
+  - canu=1.7.1
+  - samtools
+  - bcftools
+  - bedtools #used with tombo
+  - bedops #used with tombo
+  - biopython
+  - pip
+  - tabix
+  - ncurses=6.1
+  - tensorflow #makes medaka work
+  - mummer
+  - circlator
+  - ONT albacore
+	- quickmerge
