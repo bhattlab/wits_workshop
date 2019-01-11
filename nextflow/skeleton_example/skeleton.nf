@@ -32,6 +32,7 @@ process step2{
 	"""
 	//notice in the above:
 	//the default interpreter is bash.  This is used when there is no shebang line.
+	//the input file is referenced according to a variable defined in the input clause within this process
 }
 
 process step3{
