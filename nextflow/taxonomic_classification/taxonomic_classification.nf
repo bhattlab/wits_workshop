@@ -11,7 +11,9 @@ and finally visualization with a custom bargraph script written in R, as well as
 The accompanying nextflow.config file allows this workflow to be run on the Stanford SCG cluster with the
 SLURM scheduler.
 
-nextflow ../wits_workshop/nextflow/taxonomic_classification/taxonomic_classification.nf  --tax_level S -resume -profile scg
+ ~/nextflow ../wits_workshop/nextflow/taxonomic_classification/taxonomic_classification.nf  --tax_level S -resume \
+ -profile wits --in ../wits_workshop/nextflow/test_data/*.fq
+
 */
 
 //The parameters below can all be overridden with --parametername on the commandline (e.g. --in or --dataset_table)

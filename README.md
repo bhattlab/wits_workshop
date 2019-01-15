@@ -1,6 +1,27 @@
+# Running the taxonomic classification demonstration workflow
+
+### 1. Set up conda, singularity and nextflow, clone the Git repository
+
+```
+cd ~
+wget -qO- https://get.nextflow.io | bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3*.sh #accept the defaults
+conda install -c conda-forge singularity
+git clone https://github.com/bhattlab/wits_workshop.git
+```
+
+### 2. Running the workflow
+
+```
+cd ~
+mkdir test_run; cd test_run
+~/nextflow ../wits_workshop/nextflow/taxonomic_classification/taxonomic_classification.nf  --tax_level S -resume -profile scg --in ../wits_workshop/nextflow/test_data/*.fq
+```
+
 # wits_workshop
 
-[ ] Need to bring datasets with us -- set up access to Wits cluster (Eli, Ryan)  
+[x] Need to bring datasets with us -- set up access to Wits cluster (Eli, Ryan)  
 [x] Set up a repo for workshop (Eli)  
 [x] List dependencies for each module in the github readme (Fiona, Eli)  
 [x] Example workflow implementation and singularity container (Eli)  
