@@ -1,14 +1,35 @@
-# Running the taxonomic classification demonstration workflow
+# WITS Metagenomics Workshop
+
+This repository provides model materials for the 2019 WITS metagenomics workshop in Johannesburg, SA.
+
+## Running the model workflow
 
 ### 1. Set up conda, singularity and nextflow, clone the Git repository
 
 ```
 cd ~
+mkdir -p ~/local/bin
+export PATH="$PATH:~/local/bin"
+
 wget -qO- https://get.nextflow.io | bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3*.sh #accept the defaults
 conda install -c conda-forge singularity
 git clone https://github.com/bhattlab/wits_workshop.git
+```
+
+### Note: if singularity isn't supported on your compute cluster, set up environment manually instead.
+```
+conda install -y -c conda-forge -c bioconda -c r \
+kraken2 krona kraken ncurses datrie r-ggplot2 r-doby r-rcolorbrewer r-scales r-plyr r-stringi
+mkdir ~/miniconda/bin/taxonomy
+ktUpdateTaxonomy.sh
+
+git clone https://github.com/jenniferlu717/Bracken.git
+cd Bracken
+bash install_bracken.sh
+cp bracken ~/local/bin/
+cp bracken-build ~/local/bin/
 ```
 
 ### 2. Running the workflow
@@ -19,17 +40,10 @@ mkdir test_run; cd test_run
 ~/nextflow ../wits_workshop/nextflow/taxonomic_classification/taxonomic_classification.nf  --tax_level S -resume -profile scg --in ../wits_workshop/nextflow/test_data/*.fq
 ```
 
-# wits_workshop
 
-[x] Need to bring datasets with us -- set up access to Wits cluster (Eli, Ryan)  
-[x] Set up a repo for workshop (Eli)  
-[x] List dependencies for each module in the github readme (Fiona, Eli)  
-[x] Example workflow implementation and singularity container (Eli)  
+## Workflow Dependencies
 
-
-# Workflow Dependencies
-
-## Preprocessing
+### Preprocessing
 
   - fastqc
   - trim-galore
@@ -40,7 +54,7 @@ mkdir test_run; cd test_run
 	- super-deduper
 	- seqtk
 
-## Classification
+### Classification
 
   - kraken2
 	- krona (with databases)
@@ -52,13 +66,13 @@ mkdir test_run; cd test_run
   - r-scales
   - r-plyr
 
-## Assembly
+### Assembly
 
   - quast
   - spades
   - megahit
 
-## Strain comparisons
+### Strain comparisons
 
   - bwa
   - samtools
@@ -70,7 +84,7 @@ mkdir test_run; cd test_run
   - bioconductor-ggtree
   - r-phangorn
 
-## Long read assembly
+### Long read assembly
 
 	- python>3.5
   - pilon
